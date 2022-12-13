@@ -1,0 +1,14 @@
+var mat = importar("matematica")
+
+para (var numeroTentado = 2; numeroTentado <= 10000; numeroTentado = numeroTentado + 1) {
+    var primo = verdadeiro
+    para (var divisor = 2; divisor <= mat.raizQuadrada(numeroTentado); divisor = divisor + 1) {
+        se (numeroTentado % divisor == 0) {
+            primo = falso
+        }
+    }
+
+    se (primo) {
+        escreva(numeroTentado)
+    }
+}
