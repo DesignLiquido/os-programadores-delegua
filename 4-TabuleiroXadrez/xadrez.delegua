@@ -1,0 +1,37 @@
+var contadores = [0, 0, 0, 0, 0, 0, 0]
+/* var tabuleiro = [
+    [4, 3, 2, 6, 5, 2, 3, 4],
+    [1, 1, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1, 1, 1],
+    [4, 3, 2, 5, 6, 2, 3, 4],
+] */
+
+var tabuleiro = [
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+]
+
+para (var linha = 1; linha <= 8; linha = linha + 1) {
+    para (var coluna = 1; coluna <= 8; coluna = coluna + 1) {
+        var valor = tabuleiro[linha - 1][coluna - 1]
+        contadores[valor] = contadores[valor] + 1
+    }
+}
+
+escreva("Peão: " + contadores[1] + " peça(s)")
+escreva("Bispo: " + contadores[2] + " peça(s)")
+escreva("Cavalo: " + contadores[3] + " peça(s)")
+escreva("Torre: " + contadores[4] + " peça(s)")
+escreva("Rainha: " + contadores[5] + " peça(s)")
+escreva("Rei: " + contadores[6] + " peça(s)")
+
