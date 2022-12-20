@@ -5,4 +5,5 @@ Usamos a linguagem [Delégua](https://github.com/DesignLiquido/delegua).
 Vídeos no YouTube:
 
 - [Exercício 2: Primos](https://youtu.be/q5_wtRmeUOE)
+- [Exercício 3: Palíndromos](https://youtu.be/HbNyzGvKEGk)
 - [Exercício 4: Xadrez](https://youtu.be/7HCap8tHOps)
