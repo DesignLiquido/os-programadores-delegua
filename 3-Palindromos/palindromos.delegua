@@ -1,0 +1,14 @@
+para (var numero = 3000; numero <= 3010; numero = numero + 1) {
+    var numeroInvertido = ""
+    var copiaNumero = numero
+
+    enquanto (copiaNumero > 0) {
+        var resto = copiaNumero % 10
+        copiaNumero = copiaNumero \ 10
+        numeroInvertido = numeroInvertido + texto(resto)
+    }
+
+    se (numeroInvertido == texto(numero)) {
+        escreva(numeroInvertido)
+    }
+}
