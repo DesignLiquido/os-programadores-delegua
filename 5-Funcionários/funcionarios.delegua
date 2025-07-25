@@ -1,0 +1,3 @@
+const json = importar('json')
+const funcionarios = json.importarArquivoJson('./funcionarios.json')
+escreva(funcionarios)
