@@ -31,15 +31,37 @@ escreva("Pessoa com o menor salário: ${pessoaSalarioMinimo}")
 var analiticosAreas = {}
 
 para cada area em jsonFuncionarios.areas {
-    escreva(area)
+    // escreva(area)
     analiticosAreas[area['codigo']] = {
         'codigo': area['codigo'],
         'nome': area['nome'],
         'pessoaSalarioMaximo': nulo,
         'pessoaSalarioMinimo': nulo,
-        'mediaSalarial': 0
+        'mediaSalarial': 0,
+        'totalSalarios': 0,
+        'numeroFuncionarios': 0
     }
 }
 
+para cada funcionario em jsonFuncionarios.funcionarios {
+    // escreva(funcionario)
+    // var area = analiticosAreas[funcionario['area']]
+    analiticosAreas[funcionario['area']].totalSalarios += funcionario.salario
+    analiticosAreas[funcionario['area']].numeroFuncionarios += 1
+    se analiticosAreas[funcionario['area']].pessoaSalarioMaximo == nulo ou funcionario.salario > analiticosAreas[funcionario['area']].pessoaSalarioMaximo.salario {
+        analiticosAreas[funcionario['area']].pessoaSalarioMaximo = funcionario
+    }
+
+    se analiticosAreas[funcionario['area']].pessoaSalarioMinimo == nulo ou funcionario.salario < analiticosAreas[funcionario['area']].pessoaSalarioMinimo.salario {
+        analiticosAreas[funcionario['area']].pessoaSalarioMinimo = funcionario
+    }
+}
+
+// Cálculo das médias
+// para cada area em jsonFuncionarios.areas {
+
+// }
+
+escreva("Resultado total por área: ")
 escreva(analiticosAreas)
 // escreva(jsonFuncionarios.areas)
