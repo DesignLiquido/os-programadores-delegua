@@ -43,17 +43,19 @@ para cada area em jsonFuncionarios.areas {
     }
 }
 
+escreva(analiticosAreas)
+
 para cada funcionario em jsonFuncionarios.funcionarios {
     // escreva(funcionario)
-    // var area = analiticosAreas[funcionario['area']]
-    analiticosAreas[funcionario['area']].totalSalarios += funcionario.salario
-    analiticosAreas[funcionario['area']].numeroFuncionarios += 1
-    se analiticosAreas[funcionario['area']].pessoaSalarioMaximo == nulo ou funcionario.salario > analiticosAreas[funcionario['area']].pessoaSalarioMaximo.salario {
-        analiticosAreas[funcionario['area']].pessoaSalarioMaximo = funcionario
+    var area = analiticosAreas[funcionario['area']]
+    area.totalSalarios += funcionario.salario
+    area.numeroFuncionarios += 1
+    se area.pessoaSalarioMaximo == nulo ou funcionario.salario > area.pessoaSalarioMaximo.salario {
+        area.pessoaSalarioMaximo = funcionario
     }
 
-    se analiticosAreas[funcionario['area']].pessoaSalarioMinimo == nulo ou funcionario.salario < analiticosAreas[funcionario['area']].pessoaSalarioMinimo.salario {
-        analiticosAreas[funcionario['area']].pessoaSalarioMinimo = funcionario
+    se area.pessoaSalarioMinimo == nulo ou funcionario.salario < area.pessoaSalarioMinimo.salario {
+        area.pessoaSalarioMinimo = funcionario
     }
 }
 
