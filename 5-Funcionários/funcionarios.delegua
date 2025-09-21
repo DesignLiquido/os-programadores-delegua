@@ -1,69 +1,134 @@
-const json = importar('json')
-const jsonFuncionarios = json.importarArquivoJson('./funcionarios.json')
+const dados = {
+    "funcionarios":[
+        {
+            "id":0,
+            "nome":"Marcelo",
+            "sobrenome":"Silva",
+            "salario":3200.00,
+            "area":"SM"
+        },
+        {
+            "id":1,
+            "nome":"Washington",
+            "sobrenome":"Ramos",
+            "salario":2700.00,
+            "area":"UD"
+        },
+        {
+            "id":2,
+            "nome":"Sergio",
+            "sobrenome":"Pinheiro",
+            "salario":2450.00,
+            "area":"SD"
+        },
+        {
+            "id":3,
+            "nome":"Bernardo",
+            "sobrenome":"Costa",
+            "salario":3700.00,
+            "area":"SM"
+        },
+        {
+            "id":4,
+            "nome":"Cleverton",
+            "sobrenome":"Farias",
+            "salario":2750.00,
+            "area":"SD"
+        },
+        {
+            "id":5,
+            "nome":"Abraão",
+            "sobrenome":"Campos",
+            "salario":2550.00,
+            "area":"SD"
+        },
+        {
+            "id":6,
+            "nome":"Letícia",
+            "sobrenome":"Farias",
+            "salario":2450.00,
+            "area":"UD"
+        },
+        {
+            "id":7,
+            "nome":"Fernando",
+            "sobrenome":"Ramos",
+            "salario":2450.00,
+            "area":"SD"
+        },
+        {
+            "id":8,
+            "nome":"Marcelo",
+            "sobrenome":"Farias",
+            "salario":2550.00,
+            "area":"UD"
+        },
+        {
+            "id":9,
+            "nome":"Fabio",
+            "sobrenome":"Souza",
+            "salario":2750.00,
+            "area":"SD"
+        },
+        {
+            "id":10,
+            "nome":"Clederson",
+            "sobrenome":"Oliveira",
+            "salario":2500.00,
+            "area":"SD"
+        }
+    ],
+    "areas":[
+        {
+            "codigo":"SD",
+            "nome":"Desenvolvimento de Software"
+        },
+        {
+            "codigo":"SM",
+            "nome":"Gerenciamento de Software"
+        },
+        {
+            "codigo":"UD",
+            "nome":"Designer de UI/UX"
+        }
+    ]
+}
 
-var totalSalarios = 0
-var numeroFuncionarios = 0
-var pessoaSalarioMaximo = jsonFuncionarios.funcionarios[0]
-var pessoaSalarioMinimo = jsonFuncionarios.funcionarios[0]
+var maiorSalario = 0
+var menorSalario = 1000000
 
-para cada funcionario em jsonFuncionarios.funcionarios {
-    // escreva(funcionario)
-    totalSalarios += funcionario.salario
-    numeroFuncionarios += 1
-    se funcionario.salario > pessoaSalarioMaximo.salario {
-        pessoaSalarioMaximo = funcionario
+var funcionariosMaioresSalarios = []
+var funcionariosMenoresSalarios = []
+
+var numeroTotalFuncionarios = 0
+var somaSalarios = 0
+
+para cada funcionario em dados.funcionarios {
+    somaSalarios += funcionario.salario
+    numeroTotalFuncionarios = numeroTotalFuncionarios + 1
+
+    se funcionario.salario >= maiorSalario {
+        maiorSalario = funcionario.salario
+        funcionariosMaioresSalarios.adicionar(funcionario)
     }
 
-    se funcionario.salario < pessoaSalarioMinimo.salario {
-        pessoaSalarioMinimo = funcionario
+    se funcionario.salario <= menorSalario {
+        menorSalario = funcionario.salario
+        funcionariosMenoresSalarios.adicionar(funcionario)
     }
 }
 
-escreva("Total de salários: ${totalSalarios}")
-escreva("Total de funcionários: ${numeroFuncionarios}")
-
-var mediaSalarial = totalSalarios / numeroFuncionarios
-escreva("Média salarial: ${mediaSalarial}")
-
-escreva("Pessoa com o maior salário: ${pessoaSalarioMaximo}")
-escreva("Pessoa com o menor salário: ${pessoaSalarioMinimo}")
-
-var analiticosAreas = {}
-
-para cada area em jsonFuncionarios.areas {
-    // escreva(area)
-    analiticosAreas[area['codigo']] = {
-        'codigo': area['codigo'],
-        'nome': area['nome'],
-        'pessoaSalarioMaximo': nulo,
-        'pessoaSalarioMinimo': nulo,
-        'mediaSalarial': 0,
-        'totalSalarios': 0,
-        'numeroFuncionarios': 0
+para cada funcionario em funcionariosMaioresSalarios {
+    se funcionario.salario == maiorSalario {
+        escreva("global_max|${funcionario.nome} ${funcionario.sobrenome}|${maiorSalario}")
     }
 }
 
-escreva(analiticosAreas)
-
-para cada funcionario em jsonFuncionarios.funcionarios {
-    // escreva(funcionario)
-    var area = analiticosAreas[funcionario['area']]
-    area.totalSalarios += funcionario.salario
-    area.numeroFuncionarios += 1
-    se area.pessoaSalarioMaximo == nulo ou funcionario.salario > area.pessoaSalarioMaximo.salario {
-        area.pessoaSalarioMaximo = funcionario
-    }
-
-    se area.pessoaSalarioMinimo == nulo ou funcionario.salario < area.pessoaSalarioMinimo.salario {
-        area.pessoaSalarioMinimo = funcionario
+para cada funcionario em funcionariosMenoresSalarios {
+    se funcionario.salario == menorSalario {
+        escreva("global_min|${funcionario.nome} ${funcionario.sobrenome}|${menorSalario}")
     }
 }
 
-// Cálculo das médias
-// para cada area em jsonFuncionarios.areas {
-
-// }
-
-escreva("Resultado total por área: ")
-escreva(analiticosAreas)
-// escreva(jsonFuncionarios.areas)
+var mediaSalarios = somaSalarios / numeroTotalFuncionarios
+escreva("global_avg|${mediaSalarios.formatar()}")
