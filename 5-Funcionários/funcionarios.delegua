@@ -132,3 +132,52 @@ para cada funcionario em funcionariosMenoresSalarios {
 
 var mediaSalarios = somaSalarios / numeroTotalFuncionarios
 escreva("global_avg|${mediaSalarios.formatar()}")
+
+var gruposAreas = {}
+
+para cada area em dados.areas {
+    gruposAreas[area.codigo] = {
+        "nome": area.nome,
+        "salarioMaximo": 0,
+        "salarioMinimo": 1000000,
+        "mediaSalarios": 0,
+        "totalFuncionarios": 0,
+        "totalSalarios": 0,
+        "funcionariosMaioresSalarios": [],
+        "funcionariosMenoresSalarios": []
+    }
+}
+
+para cada funcionario em dados.funcionarios {
+    var area = gruposAreas[funcionario.area]
+    area.totalFuncionarios += 1
+    area.totalSalarios += funcionario.salario
+
+    se area.salarioMaximo <= funcionario.salario {
+        area.salarioMaximo = funcionario.salario
+        area.funcionariosMaioresSalarios.adicionar(funcionario)
+    }
+
+    se area.salarioMinimo >= funcionario.salario {
+        area.salarioMinimo = funcionario.salario
+        area.funcionariosMenoresSalarios.adicionar(funcionario)
+    }
+}
+
+para cada {codigoArea, area} em gruposAreas {
+    area.mediaSalarios = area.totalSalarios / area.totalFuncionarios
+
+    para cada funcionario em area.funcionariosMaioresSalarios {
+        se funcionario.salario == area.salarioMaximo {
+            escreva("area_max|${area.nome}|${funcionario.nome} ${funcionario.sobrenome}|${area.salarioMaximo}")
+        }
+    }
+
+    para cada funcionario em area.funcionariosMenoresSalarios {
+        se funcionario.salario == area.salarioMinimo {
+            escreva("area_min|${area.nome}|${funcionario.nome} ${funcionario.sobrenome}|${area.salarioMinimo}")
+        }
+    }
+
+    escreva("area_avg|${area.nome}|${area.mediaSalarios.formatar()}")
+}
