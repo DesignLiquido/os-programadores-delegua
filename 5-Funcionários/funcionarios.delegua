@@ -76,6 +76,20 @@ const dados = {
             "sobrenome":"Oliveira",
             "salario":2500.00,
             "area":"SD"
+        },
+        {
+            "id":11,
+            "nome":"Adriano",
+            "sobrenome":"Oliveira",
+            "salario":2600.00,
+            "area":"SD"
+        },
+        {
+            "id":12,
+            "nome":"Tobias",
+            "sobrenome":"Oliveira",
+            "salario":2600.00,
+            "area":"SD"
         }
     ],
     "areas":[
@@ -214,5 +228,38 @@ para cada area em areasMenosFuncionarios {
 para cada area em areasMaisFuncionarios {
     se area.totalFuncionarios == areaMaximaFuncionarios.totalFuncionarios {
         escreva("most_employees|${area.nome}|${area.totalFuncionarios}")
+    }
+}
+
+var sobrenomes = {}
+
+para cada funcionario em dados.funcionarios {
+    se !sobrenomes.contem(funcionario.sobrenome) {
+        sobrenomes[funcionario.sobrenome] = {
+            'maiorSalario': funcionario.salario,
+            'listaFuncionarios': [funcionario]
+        }
+        continua
+    }
+
+    var sobrenomeExistente = sobrenomes[funcionario.sobrenome]
+    se sobrenomeExistente.maiorSalario <= funcionario.salario {
+        sobrenomeExistente.maiorSalario = funcionario.salario
+        sobrenomeExistente.listaFuncionarios.adicionar(funcionario)
+    }
+}
+
+para cada {sobrenome, dadosSobrenome} em sobrenomes {
+    var funcionariosElegiveis = []
+    para cada funcionario em dadosSobrenome.listaFuncionarios {
+        se funcionario.salario == dadosSobrenome.maiorSalario {
+            funcionariosElegiveis.adicionar(funcionario)
+        }
+    }
+    
+    se funcionariosElegiveis.tamanho() > 1 {
+        para cada funcionario em funcionariosElegiveis {
+            escreva("last_name_max|${sobrenome}|${funcionario.nome} ${funcionario.sobrenome}|${dadosSobrenome.maiorSalario}")
+        }
     }
 }
