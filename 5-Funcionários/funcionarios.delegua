@@ -181,3 +181,38 @@ para cada {codigoArea, area} em gruposAreas {
 
     escreva("area_avg|${area.nome}|${area.mediaSalarios.formatar()}")
 }
+
+var areasMenosFuncionarios = []
+var areasMaisFuncionarios = []
+
+var areaMinimaFuncionarios = {
+    'totalFuncionarios': 1000000
+}
+
+var areaMaximaFuncionarios = {
+    'totalFuncionarios': 0
+}
+
+para cada {codigoArea, area} em gruposAreas {
+    se areaMinimaFuncionarios.totalFuncionarios >= area.totalFuncionarios {
+        areaMinimaFuncionarios = area
+        areasMenosFuncionarios.adicionar(area)
+    }
+
+    se areaMaximaFuncionarios.totalFuncionarios <= area.totalFuncionarios {
+        areaMaximaFuncionarios = area
+        areasMaisFuncionarios.adicionar(area)
+    }
+}
+
+para cada area em areasMenosFuncionarios {
+    se area.totalFuncionarios == areaMinimaFuncionarios.totalFuncionarios {
+        escreva("least_employees|${area.nome}|${area.totalFuncionarios}")
+    }
+}
+
+para cada area em areasMaisFuncionarios {
+    se area.totalFuncionarios == areaMaximaFuncionarios.totalFuncionarios {
+        escreva("most_employees|${area.nome}|${area.totalFuncionarios}")
+    }
+}
